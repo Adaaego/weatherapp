@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 
 const WeatherInfo =() =>{
     const [city, setCity] = useState(null);
+    const [input, setInput] = useState("")
+
+
     const apiKey = import.meta.env.VITE_WEATHER_API;
 
 
@@ -17,12 +20,26 @@ const WeatherInfo =() =>{
         )
     }, [])
 
+
+    //event to get weather based on user input
+    const weatherInput = (e)=>{
+        setInput(e.target.value);
+        console.log(input)
+    };
+    const searchWeather = ()=>{
+      axios.get(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${input}`)
+      .then(res =>{
+        setCity(res.data)})
+    }
+    
+
     return(
     
      <div>
          <div className="flex items-center justify-center p-4">
         <div className="flex w-full max-w-md">
           <input
+          onChange={weatherInput}
             type="text"
             placeholder="Search..."
             className="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -30,6 +47,7 @@ const WeatherInfo =() =>{
           <button
             type="submit"
             className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-r-lg hover:bg-blue-600 transition"
+            onClick={searchWeather}
           >
             Search
           </button>
