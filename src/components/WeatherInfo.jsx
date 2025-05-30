@@ -11,7 +11,7 @@ const WeatherInfo =() =>{
 
     //to fetch the data
     useEffect(() => {
-        axios.get(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=nigeria&aqi=no`)
+        axios.get(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=nigeria&aqi=no`)
         .then(res =>{
             setCity(res.data)
             console.log(res.data)
@@ -27,7 +27,7 @@ const WeatherInfo =() =>{
         console.log(input)
     };
     const searchWeather = ()=>{
-      axios.get(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${input}`)
+      axios.get(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${input}`)
       .then(res =>{
         setCity(res.data)})
     }
